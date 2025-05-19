@@ -86,8 +86,9 @@ print(clf.best_score_)
 print(clf.best_params_)
 The best results indicate criterion='gini' and max_depth=6, providing an improved predictive performance.
 
-Conclusion
+Conclusion:
 This workflow guides the construction and visualization of a Decision Tree model using Scikit-learn. The dataset is preprocessed, split into training/testing sets, and optimized using hyperparameter tuning. Decision Trees provide an intuitive representation of classification rules, making them valuable for interpretability in credit risk analysis.
 
 
-#OUTPUT
+#OUTPUT:
+![Image](https://github.com/user-attachments/assets/5979d26e-b394-4a6d-ace6-f85030485b18)
