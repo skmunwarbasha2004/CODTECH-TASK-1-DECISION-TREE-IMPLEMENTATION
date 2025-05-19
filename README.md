@@ -92,3 +92,6 @@ This workflow guides the construction and visualization of a Decision Tree model
 
 #OUTPUT:
 ![Image](https://github.com/user-attachments/assets/5979d26e-b394-4a6d-ace6-f85030485b18)
+
+
+![Image](https://github.com/user-attachments/assets/aeff02f0-5f8d-4adc-b4b2-9da63b8df584)
