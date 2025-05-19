@@ -23,67 +23,67 @@ Step 1: Importing Required Libraries
 We begin by importing the necessary Python libraries:
 
 python
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.tree import DecisionTreeClassifier, export_graphviz
-import pydotplus as pdot
-from IPython.display import Image
+import pandas as pd<br />
+from sklearn.model_selection import train_test_split<br />
+from sklearn.tree import DecisionTreeClassifier, export_graphviz<br />
+import pydotplus as pdot<br />
+from IPython.display import Image<br />
 These libraries help in data manipulation (pandas), splitting datasets (train_test_split), building a decision tree (DecisionTreeClassifier), exporting and visualizing the tree (export_graphviz, pydotplus), and displaying images (IPython.display).
 
 Step 2: Loading and Exploring the Dataset
 We read the dataset using pandas and check the first few rows:
 
-python
-df = pd.read_csv(r'/content/GermanCredit.csv')
-df.head()
+python<br />
+df = pd.read_csv(r'/content/GermanCredit.csv')<br />
+df.head()<br />
 The dataset contains 21 columns, including features such as credit history, duration, amount, employment details, and others. The target variable (credit_risk) represents whether a person is considered a high-risk or low-risk borrower.
 
 Step 3: Preparing the Data
 We separate the target variable and preprocess categorical features:
 
-python
-y = df['credit_risk']
-X = pd.get_dummies(df.drop(['credit_risk'], axis=1), drop_first=True)
+python<br />
+y = df['credit_risk']<br />
+X = pd.get_dummies(df.drop(['credit_risk'], axis=1), drop_first=True)<br />
 Categorical variables are transformed into numerical representations using one-hot encoding (pd.get_dummies). We then split the dataset into training and testing sets:
 
-python
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+python<br />
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)<br />
 This ensures that 70% of the data is used for training and 30% for testing.
 
 Step 4: Building the Decision Tree Model
 We initialize and train a decision tree classifier:
 
-python
-clf_tree = DecisionTreeClassifier(criterion='gini', max_depth=3).fit(X_train, y_train)
+python<br />
+clf_tree = DecisionTreeClassifier(criterion='gini', max_depth=3).fit(X_train, y_train)<br />
 The criterion='gini' specifies that we are using the Gini impurity metric to evaluate splits, and max_depth=3 limits the tree's depth to prevent overfitting.
 
 Step 5: Visualizing the Decision Tree
 To visualize the tree, we first export it:
 
-python
-export_graphviz(clf_tree, out_file="chd_tree.odt", feature_names=X.columns, filled=True)
+python<br />
+export_graphviz(clf_tree, out_file="chd_tree.odt", feature_names=X.columns, filled=True)<br />
 Next, we generate an image file:
 
-python
-chd_tree_graph = pdot.graphviz.graph_from_dot_file('chd_tree.odt')
-chd_tree_graph.write_jpg('chd_tree.png')
+python<br />
+chd_tree_graph = pdot.graphviz.graph_from_dot_file('chd_tree.odt')<br />
+chd_tree_graph.write_jpg('chd_tree.png')<br />
 Finally, we display the tree:
 
-python
-Image(filename='chd_tree.png')
+python<br />
+Image(filename='chd_tree.png')<br />
 Hyperparameter Tuning
 We use GridSearchCV to optimize hyperparameters:
 
-python
-from sklearn.model_selection import GridSearchCV
-tuned_parameters = [{'criterion': ['gini', 'entropy'], 'max_depth': range(2, 10)}]
-clf_tree = DecisionTreeClassifier()
-clf = GridSearchCV(clf_tree, tuned_parameters, cv=10, scoring='roc_auc').fit(X_train, y_train)
+python<br />
+from sklearn.model_selection import GridSearchCV<br />
+tuned_parameters = [{'criterion': ['gini', 'entropy'], 'max_depth': range(2, 10)}]<br />
+clf_tree = DecisionTreeClassifier()<br />
+clf = GridSearchCV(clf_tree, tuned_parameters, cv=10, scoring='roc_auc').fit(X_train, y_train)<br />
 After training, we retrieve the best model parameters:
-
-python
-print(clf.best_score_)
-print(clf.best_params_)
+<br />
+python<br />
+print(clf.best_score_)<br />
+print(clf.best_params_)<br />
 The best results indicate criterion='gini' and max_depth=6, providing an improved predictive performance.
 
 Conclusion:
